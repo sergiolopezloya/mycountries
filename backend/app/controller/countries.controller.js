@@ -3,8 +3,14 @@ const Countries = db.countries;
 // Retrieve all Countries from the database.
 exports.findAll = (req, res) => {
   const name = req.query.name;
+  const page = parseInt(req.query.page) || 0;
+  const limit = 5;
   var condition = name ? { name: { $regex: new RegExp(name), $options: 'i' } } : {};
-  Countries.find(condition)
+  Countries
+    .find(condition)
+    .limit(limit)
+    .skip(limit * page)
+    .sort('name')
     .then(data => {
       res.send(data);
     })
