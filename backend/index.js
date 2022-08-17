@@ -27,6 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
   res.json({ message: 'This is the API connection to mongodb countries' });
 });
+require('./app/routes/countries.routes')(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
