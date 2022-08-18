@@ -58,7 +58,10 @@ function App() {
                   <b>Currency:</b> ${currency}<br/>
                 </div>
                 <div class="uk-modal-footer uk-text-right">
-                  <button class="uk-button uk-button-primary uk-modal-close" type="button">Close</button>
+                <a href="javascript:toFavorites('${country._id}', '${country.name}');" class="uk-button uk-button-primary uk-text-contrast" type="button">
+                  <span uk-icon="icon: heart"></span>
+                </a>
+                <button class="uk-button uk-modal-close" type="button">Close</button>
                 </div>
               </div>
             </div>
@@ -135,6 +138,24 @@ function App() {
         <a href="#info" data-uk-toggle>Open</a>
         <div id="info" data-uk-modal>
           <div className="uk-modal-dialog uk-modal-body">Contenido</div>
+        </div>
+      </div>
+
+      <div id="tofavorite" data-uk-modal>
+        <div className="uk-modal-dialog">
+          <button className="uk-modal-close-default" type="button" data-uk-close></button>
+          <div className="uk-modal-header">
+            <h2 className="uk-modal-title">Add to favorite!</h2>
+          </div>
+          <div className="uk-modal-body uk-form">
+            <p>Are you sure you want to add country <span className="uk-text-bold" id="country_name"></span> to your favorite list?</p>
+            <label form="email">Enter your email:</label>
+            <input className="uk-input" placeholder="email@domain.com" type="email" id="fav_email" name="fav_email" />
+          </div>
+          <div className="uk-modal-footer uk-text-right">
+            <button className="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+            <a className="uk-button uk-button-primary" href="javascript:addtoFavorites()">Yes, add to favorite</a>
+          </div>
         </div>
       </div>
     </div>

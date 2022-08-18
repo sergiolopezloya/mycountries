@@ -12,7 +12,7 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+      user"s mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <!--
@@ -32,8 +32,66 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.3/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.3/dist/js/uikit-icons.min.js"></script>
     <script type="text/javascript">
+    let activeCountry = 0;
     function openModal(id) {
       UIkit.modal(document.getElementById(id)).show();
+    }
+
+    function closeModal(id) {
+      UIkit.modal(document.getElementById(id)).hide();
+    }
+
+    function toFavorites(id, name) {
+      activeCountry = id;
+      document.getElementById("country_name").innerHTML = name;
+      openModal("tofavorite");
+    }
+
+    function addtoFavorites() {
+      const email = document.getElementById("fav_email").value;
+      if (email == "") {
+        UIkit.notification({
+          message: "Please enter your email",
+          status: "danger",
+          pos: "top-center",
+          timeout: 5000
+        });
+        return;
+      }
+      var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      if (!email.match(mailformat)) {
+        UIkit.notification({
+          message: "Please enter a valid email",
+          status: "danger",
+          pos: "top-center",
+          timeout: 5000
+        });
+        return;
+      }
+      fetch(`http://localhost:8080/api/countries/addtofavorites`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email: email,
+          country_id: activeCountry
+        })
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.status == "success") {
+            closeModal("tofavorite");
+            UIkit.modal.alert("Country added to favorites");
+          } else {
+            UIkit.notification({
+              message: "Error adding country to favorites",
+              status: "danger",
+              pos: "top-center",
+              timeout: 5000
+            });
+          }
+        });
     }
     </script>
   </head>
