@@ -9,8 +9,21 @@ import './assets/scss/App.scss';
 import 'uikit/dist/css/uikit.min.css';
 import 'uikit/dist/css/uikit-core.min.css';
 import 'uikit/dist/js/uikit.min.js';
+import { useState, useEffect } from 'react';
 
 function App() {
+  const totalPages = 49;//total number of pages as countries in database
+  let [currentPage, getPage] = useState(1);
+
+  const getCountries = (page) => {
+
+  }
+
+  useEffect(() => {
+    getCountries(currentPage);
+    document.title = `My Countries, showing page ${currentPage}`;
+  });
+
   return (
     <div className="CountriesApp">
       <div className="uk-section uk-section-xsmall uk-section-primary" id="uk-header">
@@ -45,8 +58,19 @@ function App() {
           </div>
 
           <div className="uk-overlay uk-overlay-primary uk-position-cover">
-            <div className="uk-flex uk-flex-center uk-flex-middle uk-text-center">
+            <div className="uk-flex uk-flex-center uk-flex-middle uk-flex-wrap uk-text-center">
               <h2 className="uk-width-1-1">Country Select</h2>
+              <div className="uk-width-1-1">
+                <ul className="uk-pagination uk-flex-center uk-flex-middle" data-uk-margin>
+                  <li><a href="#" onClick={() => getPage(currentPage > 1 ? currentPage - 1 : currentPage)}><span data-uk-pagination-previous></span></a></li>
+                  <li>
+                    <span data-page className="uk-display-inline">{currentPage}</span>
+                    /
+                    <span data-pages className="uk-display-inline">{totalPages}</span>
+                  </li>
+                  <li><a href="#" onClick={() => getPage(currentPage < totalPages ? currentPage + 1 : currentPage)}><span data-uk-pagination-next></span></a></li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
