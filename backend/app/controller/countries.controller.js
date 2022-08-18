@@ -37,3 +37,20 @@ exports.findOne = (req, res) => {
         .send({ message: "Error retrieving Country with id=" + id });
     });
 };
+
+exports.addtofavorites = (req, res) => {
+  const id = req.params.id;
+  Countries.findById(id)
+    .then(data => {
+      if (!data)
+        res.status(404).send({ message: "Not found Country with id " + id });
+      else {
+
+      }
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving Country with id=" + id });
+    });
+}

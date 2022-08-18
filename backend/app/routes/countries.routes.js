@@ -5,5 +5,7 @@ module.exports = app => {
     router.get("/", countries.findAll);
     router.get("/:id", countries.findOne);
 
+    router.post("/addtofavorites", countries.addtofavorites);
+
     app.use('/api/countries', router);
 };
