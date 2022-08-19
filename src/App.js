@@ -157,10 +157,9 @@ function App() {
         </div>
       </div>
       {parse(countriesInfo)}
-      <div className="uk-section" id="uk-footer">
-        <a href="#info" data-uk-toggle>Open</a>
-        <div id="info" data-uk-modal>
-          <div className="uk-modal-dialog uk-modal-body">Contenido</div>
+      <div className="uk-section uk-section-secondary" id="uk-footer">
+        <div className="uk-flex uk-flex-center uk-flex-middle uk-flex-wrap uk-text-center">
+          This site is developed by <a href="https://github.com/sergiolopezloya" target="_blank" className="uk-text-bold uk-margin-small-left">Sergio Lopez</a>.
         </div>
       </div>
 
