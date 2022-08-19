@@ -6,7 +6,6 @@ exports.findAll = (req, res) => {
   const page = parseInt(req.query.page) || 0;
   const limit = 10;
   var condition = email ? { email: { $regex: new RegExp(email), $options: 'i' } } : {};
-  console.log(condition);
   Favorites
     .find(condition)
     .limit(limit)
@@ -37,7 +36,10 @@ exports.create = (req, res) => {
   favorite
     .save()
     .then(data => {
-      res.send(data);
+      res.send({
+        data: data,
+        status: "success"
+      });
     }).catch(err => {
       res.status(500).send({
         message:
