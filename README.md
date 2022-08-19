@@ -25,10 +25,15 @@ Filter: "name" - Country name.
 
 Retrive country by id.
 
-[http://localhost:8080/api/countries/addtofavorites](http://localhost:8080/api/countries/addtofavorites)
+[http://localhost:8080/api/favorites](http://localhost:8080/api/favorites)
+
+Retrive favorite list. Add parameter "page" to set page list, limit is fixed to 10.
+Filter: "email" - Email.
+
+[http://localhost:8080/api/favorites/create](http://localhost:8080/api/favorites/create)
 
 Post method to add country to favorites.
-Params: "countryId" - country ID, "email" - user email.
+Params: "country_id" - country ID, "email" - user email.
 
 ### Code Usage
 

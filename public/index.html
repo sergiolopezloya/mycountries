@@ -68,7 +68,7 @@
         });
         return;
       }
-      fetch(`http://localhost:8080/api/countries/addtofavorites`, {
+      fetch(`http://localhost:8080/api/favorites/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -85,7 +85,7 @@
             UIkit.modal.alert("Country added to favorites");
           } else {
             UIkit.notification({
-              message: "Error adding country to favorites",
+              message: data.message || "Error adding country to favorites",
               status: "danger",
               pos: "top-center",
               timeout: 5000
