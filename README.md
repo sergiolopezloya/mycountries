@@ -17,7 +17,23 @@ Open [http://localhost:8080](http://localhost:8080) to view API.
 ### `Endpoint:`
 
 [http://localhost:8080/api/countries](http://localhost:8080/api/countries)
+
 Retrive country list. Add parameter "page" to set page list, limit is fixed to 5.
+Filter: "name" - Country name.
+
+[http://localhost:8080/api/countries/:id](http://localhost:8080/api/countries/id)
+
+Retrive country by id.
+
+[http://localhost:8080/api/favorites](http://localhost:8080/api/favorites)
+
+Retrive favorite list. Add parameter "page" to set page list, limit is fixed to 10.
+Filter: "email" - Email.
+
+[http://localhost:8080/api/favorites/create](http://localhost:8080/api/favorites/create)
+
+Post method to add country to favorites.
+Params: "country_id" - country ID, "email" - user email.
 
 ### Code Usage
 

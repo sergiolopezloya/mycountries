@@ -34,6 +34,6 @@ exports.findOne = (req, res) => {
     .catch(err => {
       res
         .status(500)
-        .send({ message: "Error retrieving Country with id=" + id });
+        .send({ message: "Error retrieving Countryss with id=" + id });
     });
 };

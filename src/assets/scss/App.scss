@@ -5,6 +5,11 @@
       pointer-events: none;
       animation: logo-spin infinite 20s linear;
     }
+
+    .uk-icon-button {
+      background-color: white;
+      color: #1e87f0;
+    }
   }
 
   @keyframes logo-spin {

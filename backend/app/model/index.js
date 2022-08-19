@@ -5,4 +5,5 @@ const db = {};
 db.mongoose = mongoose;
 db.url = dbConfig.url;
 db.countries = require("./countries.model.js")(mongoose);
+db.favorites = require("./favorites.model.js")(mongoose);
 module.exports = db;

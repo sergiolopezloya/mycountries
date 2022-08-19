@@ -58,7 +58,10 @@ function App() {
                   <b>Currency:</b> ${currency}<br/>
                 </div>
                 <div class="uk-modal-footer uk-text-right">
-                  <button class="uk-button uk-button-primary uk-modal-close" type="button">Close</button>
+                <a href="javascript:toFavorites('${country._id}', '${country.name}');" class="uk-button uk-button-primary uk-text-contrast" type="button">
+                  <span uk-icon="icon: heart"></span>
+                </a>
+                <button class="uk-button uk-modal-close" type="button">Close</button>
                 </div>
               </div>
             </div>
@@ -72,14 +75,37 @@ function App() {
   useEffect(() => {
     getCountries(currentPage);
     document.title = `My Countries, showing page ${currentPage}`;
+    const email = sessionStorage.getItem("email") || "";
+    document.getElementById("sessionMenu").innerHTML = email == "" ? `
+      <div class="uk-flex uk-flex-middle">
+        <div>Login</div>
+        <div>
+          <a href="javascript:openModal('login');">
+            <span class="uk-icon-button uk-margin-small-left" uk-tooltip="title: Login with your email" uk-icon="icon: sign-in"></span>
+          </a>
+        </div>
+      </div>
+      ` : `
+      <div class="uk-flex uk-flex-middle">
+        <div>${email}</div>
+        <div>
+          <a href="javascript:logout();">
+            <span class="uk-icon-button uk-margin-small-left" uk-tooltip="title: Logout" uk-icon="icon: sign-out"></span>
+          </a>
+        </div>
+      </div>
+    `;
   });
 
   return (
     <div className="CountriesApp">
       <div className="uk-section uk-section-xsmall uk-section-primary" id="uk-header">
-        <div className="uk-flex uk-flex-center uk-flex-middle">
-          <img src={logo} className="uk-logo" alt="My Countries" />
-          <h3 className="uk-margin-remove-top uk-margin-remove-bottom uk-margin-small-left">My Countries</h3>
+        <div className="uk-flex uk-flex-center uk-flex-middle uk-flex-around">
+          <div className="uk-flex uk-flex-middle">
+            <img src={logo} className="uk-logo" alt="My Countries" />
+            <h3 className="uk-margin-remove-top uk-margin-remove-bottom uk-margin-small-left">My Countries</h3>
+          </div>
+          <div className="uk-float-right" id="sessionMenu"></div>
         </div>
       </div>
       <div className="uk-section uk-padding-remove" id="uk-content">
@@ -135,6 +161,41 @@ function App() {
         <a href="#info" data-uk-toggle>Open</a>
         <div id="info" data-uk-modal>
           <div className="uk-modal-dialog uk-modal-body">Contenido</div>
+        </div>
+      </div>
+
+      <div id="tofavorite" data-uk-modal>
+        <div className="uk-modal-dialog">
+          <button className="uk-modal-close-default" type="button" data-uk-close></button>
+          <div className="uk-modal-header">
+            <h2 className="uk-modal-title">Add to favorite!</h2>
+          </div>
+          <div className="uk-modal-body uk-form">
+            <p>Are you sure you want to add country <span className="uk-text-bold" id="country_name"></span> to your favorite list?</p>
+            <label form="email">Enter your email:</label>
+            <input className="uk-input" placeholder="email@domain.com" type="email" id="fav_email" name="fav_email" />
+          </div>
+          <div className="uk-modal-footer uk-text-right">
+            <button className="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+            <a className="uk-button uk-button-primary" href="javascript:addtoFavorites()">Yes, add to favorite</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="login" data-uk-modal>
+        <div className="uk-modal-dialog">
+          <button className="uk-modal-close-default" type="button" data-uk-close></button>
+          <div className="uk-modal-header">
+            <h2 className="uk-modal-title">Login to see favorites</h2>
+          </div>
+          <div className="uk-modal-body uk-form">
+            <label form="email">Enter your email:</label>
+            <input className="uk-input" placeholder="email@domain.com" type="email" id="login_email" name="fav_email" />
+          </div>
+          <div className="uk-modal-footer uk-text-right">
+            <button className="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+            <a className="uk-button uk-button-primary" href="javascript:login()">Login</a>
+          </div>
         </div>
       </div>
     </div>
